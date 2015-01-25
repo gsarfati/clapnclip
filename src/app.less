@@ -1,0 +1,25 @@
+@bower-components: '../bower_components';
+@bootstrap-path: '@{bower-components}/bootstrap/less';
+
+// Fonts
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800);
+
+// Bootstrap.less
+@import '@{bootstrap-path}/bootstrap';
+
+// Fonts path
+@fa-font-path: "/fonts";
+
+// External
+@import "@{bower-components}/fontawesome/less/font-awesome";
+
+// Global
+@import "style/animate";
+@import "style/custom-animate";
+@import "style/variables";
+@import "style/global";
+
+// Module
+@import "module/layout/layout";
+@import "module/menu/menu";
+@import "module/home/home";

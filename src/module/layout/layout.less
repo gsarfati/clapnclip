@@ -1,0 +1,43 @@
+.view {
+	.animated;
+}
+
+.view.ng-enter {
+  .fadeInRight;
+}
+.view.ng-leave {
+  .fadeOutLeft;
+}
+
+.header {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:50px;
+	z-index: 999;
+
+	.icon-left, .icon-right {
+		.make-xs-column(3);
+		height:100%;
+		line-height:50px;
+		.fa-2x;
+	}
+	.title {
+		.make-xs-column(6);
+		height:100%;
+		text-align:center;
+		line-height:50px;
+	}
+}
+
+.hidden-zone {
+	.animated;
+	z-index:1000;
+	position:fixed;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.0);
+}
