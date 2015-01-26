@@ -1,0 +1,8 @@
+---
+dependencies:
+  - { role: git }
+  - { role: elasticsearch }
+  - { role: supervisor }
+  - { role: nodejs }
+  - { role: mongo }
+  - { role: nginx }

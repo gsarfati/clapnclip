@@ -1,0 +1,7 @@
+server {
+
+  listen {{ general.port }};
+
+  include /etc/nginx/conf.d/*.subconf;
+
+}

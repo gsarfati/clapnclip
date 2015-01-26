@@ -1,0 +1,20 @@
+---
+- name: Clone project
+  git: repo={{ mobile.repo }} dest={{ mobile.path }} version={{ general.branch }} accept_hostkey=yes
+
+- name: Download dependencies
+  npm: path={{ mobile.path }}
+
+- name: Download bower dependencies
+  shell: ./node_modules/.bin/bower install chdir={{ mobile.path }} --allow-root
+
+- name: Build project
+  shell: ./node_modules/.bin/gulp build chdir={{ mobile.path }}
+
+- name: Change user rights
+  shell: chown -R {{ mobile.user }}:{{ mobile.group }} {{ mobile.path }}
+
+- name: Copy nginx config file
+  template: src=etc/nginx/conf.d/subconf dest=/etc/nginx/conf.d/frontend.subconf owner=root group=root
+  notify:
+  - restart-nginx

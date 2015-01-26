@@ -1,0 +1,10 @@
+---
+- name: Refresh repositories
+  apt: update_cache=yes
+  tags:
+  - packages
+
+- name: Install git
+  apt: name=git state=present
+  tags:
+  - packages

@@ -1,0 +1,10 @@
+---
+- name: Refresh repos
+  apt: update_cache=yes
+  tags:
+  - packages
+
+- name: Install supervisor
+  apt: name=supervisor state=present
+  tags:
+  - packages

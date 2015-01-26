@@ -1,0 +1,2 @@
+[ns502537]
+ansible@ns502537.ip-198-100-147.net ansible_connection=ssh ansible_ssh_host=198.100.147.154 ansible_ssh_user=ansible ansible_ssh_private_key_file=ansible/keys/ansible.ns502537.id_rsa
