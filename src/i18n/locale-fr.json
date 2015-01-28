@@ -1,3 +1,13 @@
 {
-  "TITLE": "Looky"
+  "hello": "Hello",
+  "slogan": {
+  	"line1": "Vos meilleurs moments méritent du talent",
+  	"line2": "Parce que le montage vidéo est long et complexe",
+  	"line3": "Vous pourrez bientôt engager votre CLiPer personnel",
+  	"line4": "Faire monter mes vidéos"
+  },
+  "suscribe": {
+  	"placeholder": "Saisissez votre email...",
+  	"submit": "Participer à la Bêta !"
+  }
 }

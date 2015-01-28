@@ -1,3 +1,13 @@
 {
-  "TITLE": "Looky"
+  "hello": "Hello",
+  "slogan": {
+  	"line1": "Your best moments deserve the right talent",
+  	"line2": "Because video editing takes time and care",
+  	"line3": "Soon you'll be able to hire your own personal CliPer",
+  	"line4": "Get my videos done"
+  },
+  "suscribe": {
+  	"placeholder": "Enter your email...",
+  	"submit": "Join the Beta !"
+  }
 }

@@ -1,3 +1,0 @@
----
-- name: start-backend
-  supervisorctl: name=backend state=started

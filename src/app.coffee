@@ -1,6 +1,5 @@
 angular.module "starter", [
-  "ionic"
-
+  "ui.router"
   "ngCordova"
   "ngAnimate"
   "ngStorage"
@@ -8,15 +7,20 @@ angular.module "starter", [
 
   "starter.translate"
   "starter.layout"
-  "starter.menu"
   "starter.home"
 ]
 
-.run ($ionicPlatform, $rootScope, menuService) ->
+.config ->
+    
+    Parse.initialize(
+      "aRjKHd0n73VWhZdWH3qRtXUWQX4EMaOWJI1WscOD"
+      "ibPD3bF0bhxOlIMisDNu0irteJK3NnREiCN1t372"
+    )
 
-  $ionicPlatform.ready ->
-    cordova.plugins.Keyboard.hideKeyboardAccessoryBar true  if window.cordova and window.cordova.plugins.Keyboard
-    StatusBar.styleDefault() if window.StatusBar
-    return
+.run ($rootScope, menuService) ->
 
   $rootScope.menu = menuService
+  $rootScope.user =
+    email: ''
+    ip: ''
+    lang: ''

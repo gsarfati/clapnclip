@@ -1,14 +1,3 @@
-.hidden-zone(
-	ng-show="menu.isOpen"
-	ng-click="menu.toggleMenu()"
-  ng-class="{ openMenu: menu.isOpen, closeMenu: menu.isOpen === false}"
-)
-
-.nav(
-  ui-view="menu"
-)
-
 .view(
-	ui-view="main"
-	ng-class="{ openMenu: menu.isOpen, closeMenu: menu.isOpen === false}"
+  ui-view="main"
 )
