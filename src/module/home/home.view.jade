@@ -3,3 +3,15 @@
   .header
     img.logo.ng-enter(src="img/logo.png")
 
+  .upload-box
+
+      h2 Video Uploader {{ mystery }}
+      span#UploadArea
+
+      label(for='FileBox') Choose A File:
+        input#FileBox(type='file')
+
+      label(for='NameBox') Name: {{ filename }}
+        input(type='text', ng-model="filename")
+
+      button#UploadButton.Button(type='button', ng-click="startUpload()") Upload
