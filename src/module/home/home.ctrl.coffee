@@ -2,50 +2,58 @@ angular.module "starter.home"
 
 .controller "HomeCtrl", ($scope) ->
 
-  socket = io.connect('http://localhost:8081')
-  $scope.mystery = 'tutu'
-  $scope.filename = undefined
-  $scope.file = undefined
-  fileReader = new FileReader()
-  startUpload = ->
-    console.log 'start upload'
-    return if $scope.filename is undefined
+  binaryClient = new BinaryClient 'ws://localhost:9000/binary'
 
-    filename = $scope.filename
+  $scope.videos = []
+  currentPercent = 0;
+  box = $('.video-container')
 
-    content = "<span id='NameArea'>Uploading " + $scope.file.name + " as " + filename + "</span>";
-    content += '<div id="ProgressContainer"><div id="ProgressBar"></div></div><span id="percent">0%</span>';
-    content += "<span id='Uploaded'> - <span id='MB'>0</span>/" + Math.round($scope.file.size / 1048576) + "MB</span>";
+  doNothing = (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    return
 
-    document.getElementById('UploadArea').innerHTML = content
-    fileReader.onload = (event) ->
-        socket.emit('upload', { 'name' : filename, data : event.target.result });
+  socket = io('http://localhost:9082')
 
-    socket.emit('start', { 'name' : filename, 'size' : $scope.file.size });
-  fileChosen = (event) ->
-    console.log 'file chosen'
-    $scope.file = event.target.files[0]
+  socket.on 'event', (data) ->
+    console.log '@data', data
 
-  $scope.$watch 'file', (n, m)->
-    console.log 'watch : ', n , m
+  socket.on 'end', (data) ->
+    console.log '@end', data
+    $scope.videos[0].preview = data.thumbnail
+    $scope.$apply()
 
-  document.getElementById('UploadButton').addEventListener('click', startUpload);
-  document.getElementById('FileBox').addEventListener('change', fileChosen);
+  binaryClient.on 'open', ->
 
 
-  socket.on 'moreData', (data) ->
-    console.log 'moreData'
-    console.log data
-    updateBar data.percent
-    place = data.place * 524288
-    newFile = $scope.file.slice(place, place + Math.min(524288, ($scope.file.size - place)))
-    fileReader.readAsBinaryString(newFile)
+    box.on 'dragenter', doNothing
+    box.on 'dragover', doNothing
 
-  socket.on 'done', (data) ->
-    console.log '@@@@@@@ DONE @@@@@@@@'
-    console.log data
-  updateBar = (percent)->
-    document.getElementById('ProgressBar').style.width = percent + '%'
-    document.getElementById('percent').innerHTML = (Math.round(percent*100)/100) + '%'
-    MBDone = Math.round percent / 100.0 * $scope.file.size / 1048576
-    document.getElementById('MB').innerHTML = MBDone
+    box.on 'drop', (e) ->
+      e.originalEvent.preventDefault()
+      file = e.originalEvent.dataTransfer.files[0]
+      # Add to list of uploaded files
+      console.log file.name
+      $scope.videos.push
+        title: file.name
+        preview: 0
+        percent: 0
+        duration: 0
+      $scope.$apply()
+      # `binaryClient.send` is a helper function that creates a stream with the
+      # given metadata, and then chunks up and streams the data.
+      stream = binaryClient.send(file,
+        name: file.name
+        size: file.size)
+      # Print progress
+      tx = 0
+      stream.on 'data', (data) ->
+        newPercent = (Math.floor(tx += data.rx * 100))
+        if currentPercent < newPercent
+          currentPercent = newPercent
+          $scope.videos[0].percent = currentPercent
+          $scope.$apply()
+          console.log currentPercent + '%'
+        return
+      return
+    return
