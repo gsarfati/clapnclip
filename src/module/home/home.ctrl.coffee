@@ -21,6 +21,8 @@ angular.module "starter.home"
   socket.on 'end', (data) ->
     console.log '@end', data
     $scope.videos[0].preview = data.thumbnail
+    $scope.videos[0].duration = data.duration
+    console.log '@@@ thumbnail @@@@', data.thumbnail
     $scope.$apply()
 
   binaryClient.on 'open', ->

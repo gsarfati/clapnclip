@@ -7,15 +7,18 @@ html
 
     .video-container
       .title Drag Files here
-        img(src="cover/PersonofInterestS01E01.m4v.jpg")
       .video(ng-repeat="video in videos")
 
-        .preview preview: {{ video | json }}
-          img(src="PersonofInterestS01E01.m4v.jpg")
+        .preview(ng-if="video.percent < 100")
           .icone
             i.fa.fa-circle-o-notch.fa-spin
-          .percent(ng-if="video.percent < 100") {{ video.percent }}
-        .title {{ video.title }}
+          .percent {{ video.percent }}%
 
+        .preview(ng-if="video.percent == 100")
+          img(src="{{video.preview}}")
+
+
+        .title {{ video.title }}
         .duration(ng-if="video.percent == 100") {{ video.duration }}
+
 

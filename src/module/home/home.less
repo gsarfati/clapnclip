@@ -26,27 +26,35 @@
       float:left;
       margin-left:10px;
       .preview {
+        background-size: 200px 120px;
+        -webkit-background-size: 200px 120px;
         width:200px;
         height:120px;
         background: black;
         line-height:120px;
-
+        img {
+          width:100%;
+          height:100%;
+        }
         .icone {
-          .make-xs-column(12);
-          .text-center;
+          .make-xs-column(6);
+          .text-right;
           font-size: 2em;
           height:70px;
 
         }
         .percent {
-          .make-xs-column(12);
-          .text-center;
-          color:white;
+          .make-xs-column(6);
+          .text-left;
           font-weight:100;
-          height:50px;
         }
       }
       .title {
+        color:grey;
+        width:200px;
+        font-weight:100;
+      }
+      .duration{
         color:grey;
         width:200px;
         font-weight:100;
