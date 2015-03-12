@@ -12,13 +12,15 @@ html
         .preview(ng-if="video.percent < 100")
           .icone
             i.fa.fa-circle-o-notch.fa-spin
-          .percent {{ video.percent }}%
+          .percent(ng-if="video.percent != 0") {{ video.percent }}%
+          .percent(ng-if="video.percent == 0") En attente
 
         .preview(ng-if="video.percent == 100")
-          img(src="{{video.preview}}")
+          img(ng-src="{{ video.preview }}")
 
 
         .title {{ video.title }}
+          a(href="video/{{ video.title }}")
         .duration(ng-if="video.percent == 100") {{ video.duration }}
 
 

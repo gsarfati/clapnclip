@@ -2,60 +2,86 @@ angular.module "starter.home"
 
 .controller "HomeCtrl", ($scope) ->
 
-  binaryClient = new BinaryClient 'ws://localhost:9000/binary'
+  binaryClient = new BinaryClient 'ws://localhost:9000'
+
+  socket = io('/api')
+  box = $('.video-container')
+  currentPercent = 0;
+  fileStack = []
+  stack = -1
+  uploadIsRunning = false
 
   $scope.videos = []
-  currentPercent = 0;
-  box = $('.video-container')
+
+  createNewVideo = (file) ->
+    $scope.videos.push
+      title: file.name
+      percent: 0
+      duration: 0
+    $scope.$apply()
 
   doNothing = (e) ->
     e.preventDefault()
     e.stopPropagation()
     return
 
-  socket = io('http://localhost:9082')
+  sendFile = (file) ->
+    binaryClient.send(file,
+      name: file.name
+      size: file.size)
 
-  socket.on 'event', (data) ->
-    console.log '@data', data
 
   socket.on 'end', (data) ->
-    console.log '@end', data
-    $scope.videos[0].preview = data.thumbnail
-    $scope.videos[0].duration = data.duration
-    console.log '@@@ thumbnail @@@@', data.thumbnail
+
+    $scope.videos[stack].preview = data.thumbnail
+    $scope.videos[stack].duration = data.duration
     $scope.$apply()
 
-  binaryClient.on 'open', ->
+    uploadIsRunning = false
 
+    if fileStack[stack + 1] and !uploadIsRunning
+      uploadIsRunning = true
+      stream = sendFile fileStack[stack + 1]
+      stack++
+
+      tx = 0
+      currentPercent = 0
+      stream.on 'data', (data) ->
+        newPercent = (Math.floor(tx += data.rx * 100))
+        if currentPercent < newPercent
+          currentPercent = newPercent
+          $scope.videos[stack].percent = currentPercent
+          $scope.$apply()
+          console.log currentPercent + '%'
+        return
+
+  binaryClient.on 'open', ->
 
     box.on 'dragenter', doNothing
     box.on 'dragover', doNothing
 
     box.on 'drop', (e) ->
       e.originalEvent.preventDefault()
-      file = e.originalEvent.dataTransfer.files[0]
-      # Add to list of uploaded files
-      console.log file.name
-      $scope.videos.push
-        title: file.name
-        preview: 0
-        percent: 0
-        duration: 0
-      $scope.$apply()
-      # `binaryClient.send` is a helper function that creates a stream with the
-      # given metadata, and then chunks up and streams the data.
-      stream = binaryClient.send(file,
-        name: file.name
-        size: file.size)
-      # Print progress
-      tx = 0
-      stream.on 'data', (data) ->
-        newPercent = (Math.floor(tx += data.rx * 100))
-        if currentPercent < newPercent
-          currentPercent = newPercent
-          $scope.videos[0].percent = currentPercent
-          $scope.$apply()
-          console.log currentPercent + '%'
+
+      for fileUpload in e.originalEvent.dataTransfer.files
+        fileStack.push fileUpload
+        createNewVideo fileUpload
+
+      unless uploadIsRunning
+        uploadIsRunning = true
+        stream = sendFile fileStack[stack + 1]
+        stack++
+
+        tx = 0
+        currentPercent = 0;
+        stream.on 'data', (data) ->
+          newPercent = (Math.floor(tx += data.rx * 100))
+          if currentPercent < newPercent
+            currentPercent = newPercent
+            $scope.videos[stack].percent = currentPercent
+            $scope.$apply()
+            console.log currentPercent + '%'
+          return
         return
-      return
+
     return
