@@ -2,9 +2,9 @@ angular.module "starter.home"
 
 .controller "HomeCtrl", ($scope) ->
 
-  binaryClient = new BinaryClient 'ws://localhost:9000'
+  binaryClient = new BinaryClient 'ws://91.121.177.94:9000/binary'
 
-  socket = io('/api')
+  socket = io()
   box = $('.video-container')
   currentPercent = 0;
   fileStack = []
