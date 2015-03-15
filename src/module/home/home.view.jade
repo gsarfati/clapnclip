@@ -1,26 +1,32 @@
-html
-  body
-  .view-home
 
-    .header
-      img.logo.ng-enter(src="img/logo.png")
+.view-home
 
-    .video-container
-      .title Drag Files here
-      .video(ng-repeat="video in videos")
-
-        .preview(ng-if="video.percent < 100")
-          .icone
-            i.fa.fa-circle-o-notch.fa-spin
-          .percent(ng-if="video.percent != 0") {{ video.percent }}%
-          .percent(ng-if="video.percent == 0") En attente
-
-        .preview(ng-if="video.percent == 100")
-          img(ng-src="{{ video.preview }}")
+  .header
+    img.logo.ng-enter(src="img/logo.png")
 
 
-        .title {{ video.title }}
-          a(href="video/{{ video.title }}")
-        .duration(ng-if="video.percent == 100") {{ video.duration }}
+  .video-container
+    .title Drag Files here
+    .video(ng-repeat="video in videos")
+
+      .preview(ng-if="!video.preview")
+        .icone
+          i.fa.fa-circle-o-notch.fa-spin
+        .percent(ng-if="video.percent < 100") {{ video.percent }}%
+        .percent(ng-if="video.percent == 0") En attente
 
 
+      .preview(ng-if="video.preview")
+        img(ng-if="video.percent == 100", ng-src="{{ video.preview }}")
+
+      .title {{ video.title }}
+        a(href="video/{{ video.title }}")
+      .duration(ng-if="video.preview") {{ video.duration }}
+      .close(
+        ng-if="video.preview"
+        ng-click="deleteVideo($index)"
+      )
+        .fa.fa-close
+
+.banner
+  img(src="img/builder.png")

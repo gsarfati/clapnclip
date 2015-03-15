@@ -1,3 +1,11 @@
+.banner {
+  position:absolute;
+  top:0;
+  right:0;
+  img {
+    width:200px;
+  }
+}
 .view-home {
   color: white;
   .text-center();
@@ -25,6 +33,7 @@
     .video {
       float:left;
       margin-left:10px;
+      position:relative;
       .preview {
         background-size: 200px 120px;
         -webkit-background-size: 200px 120px;
@@ -36,6 +45,7 @@
           width:100%;
           height:100%;
         }
+
         .icone {
           .make-xs-column(6);
           .text-right;
@@ -59,7 +69,14 @@
         width:200px;
         font-weight:100;
       }
-
+      .close {
+        background: red;
+        position:absolute;
+        top:0;
+        right:0;
+        z-index:999999;
+        border: 1px solid red;
+      }
     }
   }
 }

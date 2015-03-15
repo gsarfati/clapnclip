@@ -2,7 +2,8 @@ angular.module "starter.home"
 
 .controller "HomeCtrl", ($scope) ->
 
-  binaryClient = new BinaryClient 'ws://91.121.177.94:9000/binary'
+  console.log 'WINDOW : ', window.location.host
+  binaryClient = new BinaryClient "ws://#{window.location.host}:9000/binary"
 
   socket = io()
   box = $('.video-container')
@@ -13,11 +14,20 @@ angular.module "starter.home"
 
   $scope.videos = []
 
+  # $scope.videos.push
+  #   title: 'My Awesome video'
+  #   percent: 100
+  #   duration: '3min'
+
+  $scope.deleteVideo = (index) ->
+    $scope.videos.splice index, 1
+
   createNewVideo = (file) ->
     $scope.videos.push
       title: file.name
       percent: 0
       duration: 0
+      preview: false
     $scope.$apply()
 
   doNothing = (e) ->
@@ -32,7 +42,7 @@ angular.module "starter.home"
 
 
   socket.on 'end', (data) ->
-
+    console.log 'data : ', data
     $scope.videos[stack].preview = data.thumbnail
     $scope.videos[stack].duration = data.duration
     $scope.$apply()
