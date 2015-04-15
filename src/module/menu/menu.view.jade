@@ -1,0 +1,14 @@
+
+.menu
+  .menu-block(
+    ng-if="$root.menuIsOpen"
+    ng-repeat="block in blocks"
+    style="height: {{ height }}px;\
+           background: {{ block.background }};\
+           animation-delay: .{{$index}}s;\
+           -webkit-animation-delay: .{{$index}}s;"
+    ng-click="scrollTo(block.target)"
+  )
+    .icone
+      img(src="{{ block.picto }}")
+    .title {{ block.name }}

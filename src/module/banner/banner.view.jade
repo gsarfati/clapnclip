@@ -1,0 +1,18 @@
+
+.banner
+  .background-video
+    video(src="img/background.mp4", muted, autoplay, loop)
+
+  .hamburger(ng-click="$root.toggleMenu()")
+    .picto(ng-if="!$root.menuIsOpen")
+      .fa.fa-bars
+    .picto(ng-if="$root.menuIsOpen")
+      .fa.fa-close
+
+  .logo
+    img(src="img/logo-white.png")
+
+  .punchline
+    .line Confiez vos vidéos a un Pro
+    .line Vos meileurs soucenirs méritent leur montage
+    .subline 1er réseau

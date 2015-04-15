@@ -1,0 +1,63 @@
+.view-menu {
+  .animated;
+  position:fixed;
+  width:50%;
+  height:100%;
+  color:white;
+    .menu-block {
+  	.animated;
+  	.make-xs-column(6);
+    .text-center;
+    cursor:pointer;
+    padding: 30px;
+  	img {
+  		height:100%;
+  	}
+  	&.ng-enter {
+  		.zoomIn;
+  	}
+  	&.ng-leave {
+  		.zoomOut;
+  		animation-delay: 0 !important;
+  	}
+
+  	.icone {
+      .text-center;
+      height:70%;
+  	}
+  	.title {
+      .text-center;
+      height:30%;
+  	}
+  }
+}
+.menu-link {
+  .text-center;
+  line-height:30px;
+  color:white;
+  width:30px;
+  height:100px;
+  position:fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  .picto {
+    position:absolute;
+    display:inline-block;
+    .animated;
+    &.ng-enter {
+      .rotateIn;
+    }
+    &.ng-leave {
+      .rotateOut;
+    }
+  }
+}
+.menu-block:hover {
+  cursor:pointer;
+  .icone {
+    .animated;
+    .bounceIn;
+    animation-duration: 2.5s;
+  }
+}

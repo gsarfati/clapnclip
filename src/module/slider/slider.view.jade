@@ -1,0 +1,81 @@
+.breadcrumb
+  .position &nbsp;
+  .position(ng-if="step >= 2 && step < 10") Claper >
+  .position(ng-if="step >= 10") Cliper >
+
+.next-step(
+  ng-if="nextChevronIsVisible"
+  ng-click="nextStep()"
+)
+  .fa.fa-chevron-right
+
+.previous-step(
+  ng-if="prevChevronIsVisible"
+  ng-click="prevStep()"
+)
+  .fa.fa-chevron-left
+//-  @STEP 1 -------------------------------------------->
+
+.step(ng-if="step == 1")
+
+  .space
+
+    .claper(ng-click="goToStep(2)")
+      .picto
+        img(src="img/clap.png")
+      .title CLaPer
+      .msg Faites un cljeznfkj fzbfz ehjf jhze fhjz ejh
+
+
+    .video
+      video(src="img/numa.mp4", controls)
+
+    .cliper(ng-click="goToStep(10)")
+      .picto
+        img(src="img/cut.png")
+      .title CLiPer
+      .msg dnjkskjfkd fhdjs fjhs dhjf sjdh fjhs fs dfjh
+
+//-  @STEP 10 -------------------------------------------->
+
+.step.step-cliper(ng-if="step == 10")
+
+  .space
+
+    .msg Bienvenue Cliper !
+
+    .mail
+      input(type="mail", placeholder="yourmail@domain.com", ng-model="user.mailCliper")
+
+    .continue Étape Suivante
+
+
+//-  @STEP 2 -------------------------------------------->
+
+.step.step-cliper(ng-if="step == 2")
+
+  .space
+
+    .msg Bienvenue Claper !
+
+    .mail
+      input(type="mail", placeholder="yourmail@domain.com", ng-model="user.mailClaper")
+
+    .continue
+      button(ng-click="goToStep(3)") Étape Suivante
+
+//-  @STEP 3 -------------------------------------------->
+
+.step.step-dragndrop#dropBox(ng-if="step == 3")
+
+  .space
+
+    .msg Drag your video here !
+
+    #dropZone
+
+    .continue
+      button(ng-click="goToStep(3)") Choisir le CLiPer
+
+
+
