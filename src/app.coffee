@@ -9,6 +9,7 @@ angular.module "starter", [
 
   "starter.menu"
   "starter.banner"
+  "starter.uploader"
   "starter.slider"
   "starter.footer"
 ]
@@ -28,9 +29,9 @@ angular.module "starter", [
       'banner':
         templateUrl: 'banner.view.html'
         controller: 'bannerCtrl'
-      # 'dropZone':
-      #   templateUrl: 'dropZone.view.html'
-      #   controller: 'dropZoneCtrl'
+      'uploader':
+        templateUrl: 'uploader.view.html'
+        controller: 'uploaderCtrl'
       'slider':
         templateUrl: 'slider.view.html'
         controller: 'sliderCtrl'

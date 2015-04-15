@@ -1,0 +1,31 @@
+.view-uploader {
+  height: 100px;
+  background: rgba(0,0,0,0.5);
+  color:white;
+  .info {
+    .make-xs-column(6);
+    .make-xs-column-offset(3);
+
+    &.ondrag {
+      border: 3px dashed grey;
+    }
+    .title {
+      margin-top: 20px;
+      .text-center;
+      text-transform:uppercase;
+      font-size: 1.5em;
+    }
+    .subtitle {
+      .text-center;
+    }
+  }
+  .loader {
+    .make-xs-column(3);
+    margin-top: 25px;
+    .progress {
+
+      height: 20px;
+      background: #3B7BEA;
+    }
+  }
+}

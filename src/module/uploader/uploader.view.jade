@@ -1,0 +1,27 @@
+#dropZone.video-container
+  .info(ng-class="{ ondrag: ondrag }")
+    .title Vous êtes Clapeur, déposez vos rushs
+    .subtitle + Ajoutez des fichiers
+  .loader
+    .progress(style="width: {{ global.percent }}%;") {{ global.percent }} %
+
+  //- .video(ng-repeat="video in videos")
+
+  //-   .preview(ng-if="!video.preview")
+  //-     .icone
+  //-       i.fa.fa-circle-o-notch.fa-spin
+  //-     .percent(ng-if="video.percent < 100") {{ video.percent }}%
+  //-     .percent(ng-if="video.percent == 0") En attente
+
+
+  //-   .preview(ng-if="video.preview")
+  //-     img(ng-if="video.percent == 100", ng-src="{{ video.preview }}")
+
+  //-   .title {{ video.title }}
+  //-     a(href="video/{{ video.title }}")
+  //-   .duration(ng-if="video.preview") {{ video.duration }}
+  //-   .close(
+  //-     ng-if="video.preview"
+  //-     ng-click="deleteVideo($index)"
+  //-   )
+  //-     .fa.fa-close

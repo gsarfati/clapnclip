@@ -19,6 +19,6 @@ html
     .view-menu(ui-view="menu", ng-show="$root.menuIsOpen")
 
     .view-banner(ui-view="banner", ng-class="{ menuOpen: $root.menuIsOpen , menuClose: $root.menuIsOpen == false}")
-    //- .dropZone(ui-view="dropZone", ng-class="{ menuOpen: $root.menuIsOpen , menuClose: $root.menuIsOpen == false}")
+    .view-uploader(ui-view="uploader", ng-class="{ menuOpen: $root.menuIsOpen , menuClose: $root.menuIsOpen == false}")
     .view-slider(ui-view="slider", ng-class="{ menuOpen: $root.menuIsOpen , menuClose: $root.menuIsOpen == false}")
     .view-footer(ui-view="footer", ng-class="{ menuOpen: $root.menuIsOpen , menuClose: $root.menuIsOpen == false}")
